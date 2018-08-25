@@ -1,6 +1,29 @@
 body {
     margin: 0 auto;
     width: 800px;
-    text-align:center;
-    align-items: center;
+    text-align: center;
+    
+}
+
+ul li {
+    display: inline;
+}
+
+
+#alphabet li {
+    align-content: center;
+    list-style: none;
+    margin: 0 10px 10px 0;
+    width: 35px;
+    height: 40px;
+    padding: 5.5px;
+    background: black;
+    color: white;
+    cursor: pointer;
+    border: solid 1px black;
+    border-radius: 2.5px
+}
+
+#alphabet li:hover {
+    background-color: grey;
 }
