@@ -1,9 +1,15 @@
-let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+// Word has to be picked from API and shuffled
+// Length of word needs to be displayed as underscores
+// If Alphabet letter is clicked and the letter is part of the word then the letter appears in place of the underscore, Else 1 point is subtracted
+// Guess attempts need to be displayed
+// Wrong letters guessed need to be displayed
+// Total of 6 guesses before the game ends
+// User wins game if guessed within 6 attempts
+
+
+const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
-// Create a request variable and assign a new XMLHttpRequest object to it.
-let request = new XMLHttpRequest();
 
 
 // add the alphabet to the DOM
@@ -24,24 +30,7 @@ function createButtons() {
 createButtons();
 
 
-
-
-
-
-// var xhr = new XMLHttpRequest();
-// xhr.withCredentials = true;
-
-// xhr.addEventListener("readystatechange", function () {
-//     if (this.readyState === 4) {
-//         console.log(this.responseText);
-//     }
-// });
-
-// xhr.open("GET", "http://app.linkedin-reach.io/words");
-// xhr.setRequestHeader("Cache-Control", "no-cache");
-
-// xhr.send();
-
+// GET API request
 function handleSuccess() {
     console.log(this.responseText);
 }
