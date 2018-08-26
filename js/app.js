@@ -17,7 +17,7 @@ function createButtons() {
     buttons = document.getElementById('buttons');
     ul = document.createElement('ul');
 
-    for (var i = 0; i < alphabet.length; i++) {
+    for (let i = 0; i < alphabet.length; i++) {
         ul.id = 'alphabet';
         list = document.createElement('li');
         list.id = 'letter';
@@ -32,7 +32,10 @@ createButtons();
 
 // GET API request
 function handleSuccess() {
-    console.log(this.responseText);
+    let words = this.responseText;
+    let wordsArray = words.split('\n');
+    
+    console.log(wordsArray);
 }
 
 function handleError() {
