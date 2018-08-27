@@ -1,4 +1,4 @@
-// Word has to be picked from API and shuffled
+
 // Length of word needs to be displayed as underscores
 // If Alphabet letter is clicked and the letter is part of the word then the letter appears in place of the underscore, Else 1 point is subtracted
 // Guess attempts need to be displayed
@@ -33,11 +33,25 @@ createButtons();
 // If API successfully loads
 function handleSuccess() {
     let words = this.responseText;
+
+    // creates an array out of the API Call
     let wordsArray = words.split('\n');
+
+    // generates random word from the array
     let randomNum = Math.floor(Math.random() * wordsArray.length);
     let chosenWord = wordsArray[randomNum];
     console.log(chosenWord);
+
+    // generate underscore
+    let underscore = [];
+    let generateUnderscore = () => {
+        for (let i = 0; i < chosenWord.length; i++) {
+            underscore.push('_');
+        }
+        return underscore;
+    }
     
+    console.log(generateUnderscore());
 }
 
 // If there is an error

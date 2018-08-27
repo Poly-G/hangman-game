@@ -9,9 +9,12 @@ ul li {
     display: inline;
 }
 
+.container {
+     align-content: center;
+}
 
 #alphabet li {
-    align-content: center;
+   
     list-style: none;
     margin: 0 10px 10px 0;
     width: 35px;
