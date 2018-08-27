@@ -11,6 +11,22 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -30,18 +46,26 @@ function createButtons() {
 createButtons();
 
 
-// GET API request
+// If API successfully loads
 function handleSuccess() {
     let words = this.responseText;
     let wordsArray = words.split('\n');
+    let randomNum = Math.floor(Math.random() * wordsArray.length);
+    let chosenWord = wordsArray[randomNum];
+    console.log(chosenWord);
     
-    console.log(wordsArray);
+    // for (let i = 0; i < wordsArray.length; i++) {
+    //     let chosenWord = Math.floor(Math.random() * wordsArray.length)
+    //     console.log(chosenWord);
+    // }
 }
 
+// If there is an error
 function handleError() {
     console.log('An error occurred');
 }
 
+// GET API request
 const request = new XMLHttpRequest();
 request.open('GET', 'http://app.linkedin-reach.io/words');
 request.onload = handleSuccess;
