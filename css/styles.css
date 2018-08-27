@@ -13,6 +13,11 @@ ul li {
      align-content: center;
 }
 
+.score .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
 #alphabet li {
    
     list-style: none;

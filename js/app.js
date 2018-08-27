@@ -6,12 +6,25 @@
 // Total of 6 guesses before the game ends
 // User wins game if guessed within 6 attempts
 
+// GET API request
+const request = new XMLHttpRequest();
+request.open('GET', 'http://app.linkedin-reach.io/words');
+request.onload = handleSuccess;
+request.onerror = handleError;
+request.send();
 
+// global variables
+const buttons = document.getElementById('buttons');
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-    't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    't', 'u', 'v', 'w', 'x', 'y', 'z'
+];
 
-const buttons = document.getElementById('buttons');
+let rightLetter = [];
+let wrongLetter = [];
+let underscore = [];
+let blanksAndRightLetters = [];
+let fillInBlank = [];
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -27,20 +40,8 @@ function createButtons() {
         ul.appendChild(list);
     }
 }
+
 createButtons();
-
-let letter = document.querySelectorAll('li.letter')
-
-// button event lister 
-buttons.addEventListener('click', (event) => {
-    let target = event.target;
-    let buttonClick = target.innerHTML;
-    if (buttonClick.length === 1) {
-        console.log(buttonClick);
-    }
-    
-
-});
 
 
 // If API successfully loads
@@ -49,33 +50,62 @@ function handleSuccess() {
 
     // creates an array out of the API Call
     let wordsArray = words.split('\n');
+    
+    
 
     // generates random word from the array
     let randomNum = Math.floor(Math.random() * wordsArray.length);
     let chosenWord = wordsArray[randomNum];
     console.log(chosenWord);
+    // split the chosen word into individual letters
+    let chosenLetters = chosenWord.split('');
+    console.log(chosenLetters);
+    // number of blanks 
+    numBlanks = chosenLetters.length;
+    console.log(numBlanks);
+
 
     // generate underscore
-    let underscore = [];
     let generateUnderscore = () => {
 
         for (let i = 0; i < chosenWord.length; i++) {
             underscore.push('_');
         }
-        
         return underscore;
     }
     console.log(generateUnderscore());
+    
+    
+
+    // button event lister 
+    buttons.addEventListener('click', (event) => {
+        let target = event.target;
+        let buttonClick = target.innerHTML;
+
+        // check that buttonClick is a single letter
+        if (buttonClick.length === 1) {
+
+            // if user guess is right
+            if (chosenWord.indexOf(buttonClick) > -1) {
+                rightLetter.push(buttonClick);
+                
+                console.log(rightLetter);
+
+                // if user guess is wrong
+            } else {
+                wrongLetter.push(buttonClick);
+                console.log(wrongLetter);
+            }
+        }  
+
+    });
+
+
+
+
 }
 
 // If there is an error
 function handleError() {
     console.log('An error occurred');
 }
-
-// GET API request
-const request = new XMLHttpRequest();
-request.open('GET', 'http://app.linkedin-reach.io/words');
-request.onload = handleSuccess;
-request.onerror = handleError;
-request.send();
