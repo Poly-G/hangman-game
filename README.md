@@ -23,9 +23,7 @@ Add additional notes about how to deploy this on a live system
 
 Vanilla JavaScript, REST api 
 
-## Live Demo
 
-[DEMO](https://poly-g.github.io/hangman-game/)
 
 
 

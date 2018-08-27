@@ -11,10 +11,11 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
+buttons = document.getElementById('buttons');
 
 // add the alphabet to the DOM
 function createButtons() {
-    buttons = document.getElementById('buttons');
+    
     ul = document.createElement('ul');
 
     for (let i = 0; i < alphabet.length; i++) {
@@ -25,9 +26,21 @@ function createButtons() {
 
         buttons.appendChild(ul);
         ul.appendChild(list);
+
+       
     }
+
 }
 createButtons();
+
+buttons.addEventListener('click', (event) => {
+    let target = event.target;
+    let buttonClick = target.innerHTML;
+    
+console.log(buttonClick);
+
+
+});
 
 
 // If API successfully loads
@@ -52,6 +65,8 @@ function handleSuccess() {
     }
     
     console.log(generateUnderscore());
+
+    
 }
 
 // If there is an error
