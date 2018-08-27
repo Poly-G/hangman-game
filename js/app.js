@@ -11,11 +11,10 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-buttons = document.getElementById('buttons');
+const buttons = document.getElementById('buttons');
 
 // add the alphabet to the DOM
 function createButtons() {
-    
     ul = document.createElement('ul');
 
     for (let i = 0; i < alphabet.length; i++) {
@@ -26,19 +25,20 @@ function createButtons() {
 
         buttons.appendChild(ul);
         ul.appendChild(list);
-
-       
     }
-
 }
 createButtons();
 
+let letter = document.querySelectorAll('li.letter')
+
+// button event lister 
 buttons.addEventListener('click', (event) => {
     let target = event.target;
     let buttonClick = target.innerHTML;
+    if (buttonClick.length === 1) {
+        console.log(buttonClick);
+    }
     
-console.log(buttonClick);
-
 
 });
 
@@ -58,15 +58,14 @@ function handleSuccess() {
     // generate underscore
     let underscore = [];
     let generateUnderscore = () => {
+
         for (let i = 0; i < chosenWord.length; i++) {
             underscore.push('_');
         }
+        
         return underscore;
     }
-    
     console.log(generateUnderscore());
-
-    
 }
 
 // If there is an error
