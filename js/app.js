@@ -17,6 +17,7 @@ request.send();
 
 // global variables
 const word = document.getElementById('word');
+const wrongLettersDOM = document.getElementById('wrongLettersDOM');
 const buttons = document.getElementById('buttons');
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
@@ -28,7 +29,7 @@ let wrongLetter = [];
 let underscore = [];
 let blanksAndSuccesses = [];
 let docUnderscore = document.getElementById('word');
-let testing;
+let wrongNum;
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -49,6 +50,7 @@ createButtons();
 
 // If API successfully loads
 function handleSuccess() {
+    // captures the API words
     let words = this.responseText;
 
     // creates an array out of the API Call
@@ -63,10 +65,6 @@ function handleSuccess() {
     let chosenLetters = chosenWord.split('');
     console.log(chosenLetters);
 
-    // number of blanks 
-    numBlanks = chosenLetters.length;
-    console.log(numBlanks);
-
 
     // generate underscore
     let generateUnderscore = () => {
@@ -77,7 +75,7 @@ function handleSuccess() {
             docUnderscore.innerHTML = underscore.join(' ');
         }
     }
-    console.log(generateUnderscore());
+    generateUnderscore();
 
 
 
@@ -104,48 +102,55 @@ function handleSuccess() {
 
                 console.log(rightLetter);
 
-                // if entire word is right, win game
+                
                 
 
                 // if user guess is wrong
             } else {
                 wrongLetter.push(buttonClick);
+                wrongLettersDOM.innerHTML = wrongLetter.join(' , ');
                 console.log(wrongLetter);
+                wrongNum = wrongLetter.length;
             }
+
+            // if entire word is right, win game
             if (underscore.join('') == chosenWord) {
                 alert('you win');
-            } else if (wrongLetter.length == 6) {
-                alert('you lost');
+            // if there are 6 wrong letters, game over    
+            } if (wrongLetter.length === 6) {
+                alert('Game Over');
             }
+
         }
 
-        // removes stars
-            let stars = document.querySelectorAll('.fa-star');
-        if (wrongLetter.length == 1) {
-                stars[0].remove();
-        } if (wrongLetter.length == 2) {
-                stars[0].remove();
-        } if (wrongLetter.length == 3) {
-                stars[0].remove();
-        } if (wrongLetter.length == 4) {
-                stars[0].remove();
-        } if (wrongLetter.length == 5) {
-                stars[0].remove();
-        } if (wrongLetter.length == 6) {
-                stars[0].remove();
-            }
-
+        // removes stars on wrong guesses 
+        let stars = document.querySelectorAll('.fa-star');
+        console.log(wrongNum);
         
+        if (wrongLetter.length == 1) {
+                    stars[0].remove();
+        } if (wrongLetter.length == 2) {
+                    stars[0].remove();
+        } if (wrongLetter.length == 3) {
+                    stars[0].remove();
+        } if (wrongLetter.length == 4) {
+                    stars[0].remove();
+        } if (wrongLetter.length == 5) {
+                    stars[0].remove();
+        } if (wrongLetter.length == 6) {
+                    stars[0].remove();
+                }
 
     });
    
 
 }
 
-
-
-
 // If there is an error
 function handleError() {
     console.log('An error occurred');
 }
+
+/* bugs */
+// double letters dont populate 
+// stars get removed on every click, not just wrong guesses
