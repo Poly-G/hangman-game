@@ -95,23 +95,50 @@ function handleSuccess() {
 
                 underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
 
-                // if entire word is right, win game
-                if (underscore.join('') == chosenWord) {
-                    alert('you win');
-                }
+                
+                
+
                 docUnderscore.innerHTML = underscore.join(' ');
                 console.log(underscore);
 
+
                 console.log(rightLetter);
+
+                // if entire word is right, win game
+                
 
                 // if user guess is wrong
             } else {
                 wrongLetter.push(buttonClick);
                 console.log(wrongLetter);
             }
+            if (underscore.join('') == chosenWord) {
+                alert('you win');
+            } else if (wrongLetter.length == 6) {
+                alert('you lost');
+            }
         }
 
+        // removes stars
+            let stars = document.querySelectorAll('.fa-star');
+        if (wrongLetter.length == 1) {
+                stars[0].remove();
+        } if (wrongLetter.length == 2) {
+                stars[0].remove();
+        } if (wrongLetter.length == 3) {
+                stars[0].remove();
+        } if (wrongLetter.length == 4) {
+                stars[0].remove();
+        } if (wrongLetter.length == 5) {
+                stars[0].remove();
+        } if (wrongLetter.length == 6) {
+                stars[0].remove();
+            }
+
+        
+
     });
+   
 
 }
 
