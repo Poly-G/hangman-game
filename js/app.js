@@ -14,6 +14,7 @@ request.onerror = handleError;
 request.send();
 
 // global variables
+const word = document.getElementById('word');
 const buttons = document.getElementById('buttons');
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
@@ -23,8 +24,7 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 let rightLetter = [];
 let wrongLetter = [];
 let underscore = [];
-let blanksAndRightLetters = [];
-let fillInBlank = [];
+let blanksAndSuccesses = [];
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -88,6 +88,10 @@ function handleSuccess() {
             // if user guess is right
             if (chosenWord.indexOf(buttonClick) > -1) {
                 rightLetter.push(buttonClick);
+                underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
+                
+                console.log(underscore);
+                
                 
                 console.log(rightLetter);
 
@@ -99,9 +103,6 @@ function handleSuccess() {
         }  
 
     });
-
-
-
 
 }
 
