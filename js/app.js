@@ -25,6 +25,7 @@ let rightLetter = [];
 let wrongLetter = [];
 let underscore = [];
 let blanksAndSuccesses = [];
+let docUnderscore = document.getElementById('word');
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -70,6 +71,7 @@ function handleSuccess() {
 
         for (let i = 0; i < chosenWord.length; i++) {
             underscore.push('_');
+            docUnderscore.innerHTML = underscore.join(' ');
         }
         return underscore;
     }
@@ -88,7 +90,13 @@ function handleSuccess() {
             // if user guess is right
             if (chosenWord.indexOf(buttonClick) > -1) {
                 rightLetter.push(buttonClick);
+
                 underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
+
+                // if entire word is right, win game
+                if (underscore.join('') == chosenWord) {
+                    alert('you win');
+                }
                 
                 console.log(underscore);
                 
