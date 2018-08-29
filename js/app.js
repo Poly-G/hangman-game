@@ -29,9 +29,10 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 let rightLetter = [];
 let wrongLetter = [];
 let underscore = [];
-let blanksAndSuccesses = [];
-let docUnderscore = document.getElementById('word');
 let wrongNum = 0;
+let docUnderscore = document.getElementById('word');
+
+
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -108,24 +109,19 @@ function handleSuccess() {
             // if user guess is right
             if (chosenWord.indexOf(buttonClick) > -1) {
 
-                /* if buttonclick is anywhere else in the array, populate it */
+                // makes sure letter only gets added once
                 if (rightLetter.indexOf(buttonClick) == -1) {
                     rightLetter.push(buttonClick);
+                    wrongNum = 0;
+
+                    // changes the underscore to the buttonClick
+                    underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
                     
-                
-                
 
-
-                
-                
-                underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
-
-                // add the underscores + correct letters to DOM
-                docUnderscore.innerHTML = underscore.join(' ');
-
-                docUnderscore
-
-                console.log(underscore);
+                    // add the underscores + correct letters to DOM
+                    docUnderscore.innerHTML = underscore.join(' ');
+                    console.log(underscore);
+                    
                 }
                 
 
@@ -136,7 +132,9 @@ function handleSuccess() {
                     wrongLettersDOM.innerHTML = wrongLetter.join(' , ');
                     console.log(wrongLetter);
                     wrongNum++;
+                    
                 }
+                
                 console.log(wrongNum);
                 
                 
@@ -154,27 +152,14 @@ function handleSuccess() {
 
         // removes stars on wrong guesses 
         let stars = document.querySelectorAll('.fa-star');
+
+        
         
         
         if (wrongNum == 1) {
                     stars[0].remove();
-                    console.log(wrongNum)
+                    wrongNum = 0;
         }
-        if (wrongNum == 2) {
-                    stars[0].remove();
-        }
-        if (wrongNum == 3) {
-                    stars[0].remove();
-        }
-        if (wrongNum == 4) {
-                    stars[0].remove();
-        }
-        if (wrongNum == 5) {
-                    stars[0].remove();
-        }
-        if (wrongNum > 7) {
-                    stars[0].remove();
-                }
 
     });
    
@@ -188,5 +173,4 @@ function handleError() {
 
 /* bugs */
 // double letters dont populate 
-// can click words more than once
 // stars get removed on every click, not just wrong guesses
