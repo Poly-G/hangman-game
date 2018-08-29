@@ -31,7 +31,7 @@ let wrongLetter = [];
 let underscore = [];
 let blanksAndSuccesses = [];
 let docUnderscore = document.getElementById('word');
-let wrongNum;
+let wrongNum = 0;
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -109,7 +109,7 @@ function handleSuccess() {
             if (chosenWord.indexOf(buttonClick) > -1) {
 
                 /* if buttonclick is anywhere else in the array, populate it */
-                
+                if (rightLetter.indexOf(buttonClick) == -1) {
                     rightLetter.push(buttonClick);
                     
                 
@@ -126,6 +126,7 @@ function handleSuccess() {
                 docUnderscore
 
                 console.log(underscore);
+                }
                 
 
                 // if user guess is wrong
@@ -134,8 +135,9 @@ function handleSuccess() {
                     wrongLetter.push(buttonClick);
                     wrongLettersDOM.innerHTML = wrongLetter.join(' , ');
                     console.log(wrongLetter);
-                    wrongNum --;
+                    wrongNum++;
                 }
+                console.log(wrongNum);
                 
                 
             }
