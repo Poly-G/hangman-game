@@ -1,12 +1,3 @@
-// If Alphabet letter is clicked and the letter is part of the word then the letter appears in place of the underscore, Else 1 point is subtracted
-// Guess attempts need to be displayed
-// Wrong letters guessed need to be displayed
-// Total of 6 guesses before the game ends
-// User wins game if guessed within 6 attempts
-
-// push the correct letter into the DOM without the commas
-//
-
 // GET API request
 const request = new XMLHttpRequest();
 request.open('GET', 'http://app.linkedin-reach.io/words');
@@ -23,6 +14,7 @@ const winnerPlayAgain = document.querySelector('.winner-play-again');
 const word = document.getElementById('word');
 const wrongLettersDOM = document.getElementById('wrongLettersDOM');
 const buttons = document.getElementById('buttons');
+
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z'
@@ -33,8 +25,6 @@ let wrongLetter = [];
 let underscore = [];
 let wrongNum = 0;
 let docUnderscore = document.getElementById('word');
-
-
 
 // add the alphabet to the DOM
 function createButtons() {
@@ -53,6 +43,7 @@ function createButtons() {
 
 createButtons();
 
+// modal
 function openLoserModal() {
     loserModal.style.display = 'block';
 }
@@ -93,7 +84,6 @@ function handleSuccess() {
 
     // generate underscore
     let generateUnderscore = () => {
-
         for (let i = 0; i < chosenWord.length; i++) {
             underscore.push('_');
             // add underscore to the DOM
@@ -101,11 +91,6 @@ function handleSuccess() {
         }
     }
     generateUnderscore();
-
-    function once() {
-        console.log("Done.");
-        buttons.removeEventListener("click", once);
-    }
 
     // button event lister 
     buttons.addEventListener('click', (event) => {
@@ -115,36 +100,32 @@ function handleSuccess() {
 
         // check if buttonClick is a single letter
         if (buttonClick.length === 1) {
-
-            // if user guess is right
-            if (chosenWord.indexOf(buttonClick) > -1) {
-
-                // makes sure letter only gets added once
+            // if user guess is right && makes sure letter only gets added once
+            if (chosenWord.indexOf(buttonClick) > -1 ) {
                 if (rightLetter.indexOf(buttonClick) == -1) {
                     rightLetter.push(buttonClick);
+                    console.log(rightLetter);
                     wrongNum = 0;
 
                     // changes the underscore to the buttonClick
-                    underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
-
+                    for (let index = 0; index < chosenLetters.length; index++) {
+                        if (chosenLetters[index] === buttonClick) {
+                            underscore[index] = buttonClick
+                        }
+                    }
                     // add the underscores + correct letters to DOM
                     docUnderscore.innerHTML = underscore.join(' ');
                     console.log(underscore);
-                    
                 }
-                
-
-                // if user guess is wrong
             } else {
+                // if user guess is wrong
                 if (wrongLetter.indexOf(buttonClick) == -1) {
                     wrongLetter.push(buttonClick);
                     wrongLettersDOM.innerHTML = wrongLetter.join(' , ');
                     console.log(wrongLetter);
                     wrongNum++;
-                    
                 }
             }
-
             // if entire word is right, win game
             if (underscore.join('') == chosenWord) {
                 openWinnerModal();
@@ -152,9 +133,7 @@ function handleSuccess() {
             } if (wrongLetter.length === 6) {
                 openLoserModal();
             }
-
         }
-
         // removes stars on wrong guesses 
         let stars = document.querySelectorAll('.fa-star');
 
@@ -162,17 +141,10 @@ function handleSuccess() {
             stars[0].remove();
             wrongNum = 0;
         }
-
     });
-   
-
 }
 
-// If there is an error
+// If there is an error with the API
 function handleError() {
     console.log('An error occurred');
 }
-
-/* bugs */
-// double letters dont populate 
-// stars get removed on every click, not just wrong guesses
