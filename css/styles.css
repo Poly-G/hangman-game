@@ -2,7 +2,11 @@ body {
     margin: 0 auto;
     width: 800px;
     text-align: center;
-    
+}
+
+#word {
+    font-size: 2em;
+    font-weight: bold;
 }
 
 ul li {
@@ -16,10 +20,10 @@ ul li {
 .score .stars li {
     list-style: none;
     display: inline-block;
+    
 }
 
 #alphabet li {
-   
     list-style: none;
     margin: 0 10px 10px 0;
     width: 35px;

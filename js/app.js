@@ -1,12 +1,11 @@
-// GET API request
+/* GET API request */
 const request = new XMLHttpRequest();
 request.open('GET', 'http://app.linkedin-reach.io/words');
 request.onload = handleSuccess;
 request.onerror = handleError;
 request.send();
 
-
-// global variables
+/* Global variables */
 const loserModal = document.querySelector('.loser-modal');
 const winnerModal = document.querySelector('.winner-modal');
 const loserPlayAgain = document.querySelector('.loser-play-again');
@@ -26,7 +25,7 @@ let underscore = [];
 let wrongNum = 0;
 let docUnderscore = document.getElementById('word');
 
-// add the alphabet to the DOM
+/* Add the alphabet to the DOM */
 function createButtons() {
     ul = document.createElement('ul');
 
@@ -43,7 +42,7 @@ function createButtons() {
 
 createButtons();
 
-// modal
+/* Modal */
 function openLoserModal() {
     loserModal.style.display = 'block';
 }
@@ -64,7 +63,7 @@ loserPlayAgain.addEventListener('click', function () {
     reloadPage();
 })
 
-// If API successfully loads
+/* API successful */
 function handleSuccess() {
     // captures the API words
     let words = this.responseText;
@@ -82,7 +81,7 @@ function handleSuccess() {
     console.log(chosenLetters);
 
 
-    // generate underscore
+    /* Generate underscore */
     let generateUnderscore = () => {
         for (let i = 0; i < chosenWord.length; i++) {
             underscore.push('_');
@@ -92,7 +91,7 @@ function handleSuccess() {
     }
     generateUnderscore();
 
-    // button event lister 
+    /* Alphabet button event lister */
     buttons.addEventListener('click', (event) => {
         let target = event.target;
         // buttonClick is the letter of the button
@@ -100,11 +99,11 @@ function handleSuccess() {
 
         // check if buttonClick is a single letter
         if (buttonClick.length === 1) {
-            // if user guess is right && makes sure letter only gets added once
+            // User guess is right 
             if (chosenWord.indexOf(buttonClick) > -1 ) {
+                // makes sure letter only gets added once
                 if (rightLetter.indexOf(buttonClick) == -1) {
                     rightLetter.push(buttonClick);
-                    console.log(rightLetter);
                     wrongNum = 0;
 
                     // changes the underscore to the buttonClick
@@ -113,16 +112,16 @@ function handleSuccess() {
                             underscore[index] = buttonClick
                         }
                     }
+
                     // add the underscores + correct letters to DOM
                     docUnderscore.innerHTML = underscore.join(' ');
                     console.log(underscore);
                 }
             } else {
-                // if user guess is wrong
+                // User guess is wrong
                 if (wrongLetter.indexOf(buttonClick) == -1) {
                     wrongLetter.push(buttonClick);
                     wrongLettersDOM.innerHTML = wrongLetter.join(' , ');
-                    console.log(wrongLetter);
                     wrongNum++;
                 }
             }
@@ -134,6 +133,7 @@ function handleSuccess() {
                 openLoserModal();
             }
         }
+
         // removes stars on wrong guesses 
         let stars = document.querySelectorAll('.fa-star');
 
@@ -144,7 +144,7 @@ function handleSuccess() {
     });
 }
 
-// If there is an error with the API
+/* Error with API request */
 function handleError() {
     console.log('An error occurred');
 }
