@@ -16,6 +16,8 @@ request.send();
 
 
 // global variables
+const modal = document.querySelector('.modal');
+const playAgainButton = document.querySelector('.play-again');
 const word = document.getElementById('word');
 const wrongLettersDOM = document.getElementById('wrongLettersDOM');
 const buttons = document.getElementById('buttons');
@@ -48,6 +50,18 @@ function createButtons() {
 
 createButtons();
 
+function openModal() {
+    modal.style.display = 'block';
+}
+
+function reloadPage() {
+    location.reload();
+}
+
+playAgainButton.addEventListener('click', function () {
+    reloadPage();
+})
+
 // If API successfully loads
 function handleSuccess() {
     // captures the API words
@@ -77,40 +91,53 @@ function handleSuccess() {
     }
     generateUnderscore();
 
-
+    function once() {
+        console.log("Done.");
+        buttons.removeEventListener("click", once);
+    }
 
     // button event lister 
     buttons.addEventListener('click', (event) => {
         let target = event.target;
+        // buttonClick is the letter of the button
         let buttonClick = target.innerHTML;
 
-        // check that buttonClick is a single letter
+        // check if buttonClick is a single letter
         if (buttonClick.length === 1) {
 
             // if user guess is right
             if (chosenWord.indexOf(buttonClick) > -1) {
-                rightLetter.push(buttonClick);
 
+                /* if buttonclick is anywhere else in the array, populate it */
+                
+                    rightLetter.push(buttonClick);
+                    
+                
+                
+
+
+                
+                
                 underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
 
-                
-                
-
+                // add the underscores + correct letters to DOM
                 docUnderscore.innerHTML = underscore.join(' ');
+
+                docUnderscore
+
                 console.log(underscore);
-
-
-                console.log(rightLetter);
-
-                
                 
 
                 // if user guess is wrong
             } else {
-                wrongLetter.push(buttonClick);
-                wrongLettersDOM.innerHTML = wrongLetter.join(' , ');
-                console.log(wrongLetter);
-                wrongNum = wrongLetter.length;
+                if (wrongLetter.indexOf(buttonClick) == -1) {
+                    wrongLetter.push(buttonClick);
+                    wrongLettersDOM.innerHTML = wrongLetter.join(' , ');
+                    console.log(wrongLetter);
+                    wrongNum --;
+                }
+                
+                
             }
 
             // if entire word is right, win game
@@ -118,26 +145,32 @@ function handleSuccess() {
                 alert('you win');
             // if there are 6 wrong letters, game over    
             } if (wrongLetter.length === 6) {
-                alert('Game Over');
+                openModal();
             }
 
         }
 
         // removes stars on wrong guesses 
         let stars = document.querySelectorAll('.fa-star');
-        console.log(wrongNum);
         
-        if (wrongLetter.length == 1) {
+        
+        if (wrongNum == 1) {
                     stars[0].remove();
-        } if (wrongLetter.length == 2) {
+                    console.log(wrongNum)
+        }
+        if (wrongNum == 2) {
                     stars[0].remove();
-        } if (wrongLetter.length == 3) {
+        }
+        if (wrongNum == 3) {
                     stars[0].remove();
-        } if (wrongLetter.length == 4) {
+        }
+        if (wrongNum == 4) {
                     stars[0].remove();
-        } if (wrongLetter.length == 5) {
+        }
+        if (wrongNum == 5) {
                     stars[0].remove();
-        } if (wrongLetter.length == 6) {
+        }
+        if (wrongNum > 7) {
                     stars[0].remove();
                 }
 
@@ -153,4 +186,5 @@ function handleError() {
 
 /* bugs */
 // double letters dont populate 
+// can click words more than once
 // stars get removed on every click, not just wrong guesses
