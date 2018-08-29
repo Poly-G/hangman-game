@@ -16,11 +16,18 @@
 
     <div class="container">
         <h1>Hangman Game</h1>
-            <div class='modal'>
-                <div class='modal-content'>
+            <div class='loser-modal'>
+                <div class='loser-modal-content'>
                     <p>Game Over :(</p>
                     <p>Would you like to play again?</p>
-                    <button class="play-again">HELL YEAH!</button>
+                    <button class="loser-play-again">HELL YEAH!</button>
+                </div>
+            </div>
+            <div class='winner-modal'>
+                <div class='winner-modal-content'>
+                    <p>Congratulations!! You Won!</p>
+                    <p>Would you like to play again?</p>
+                    <button class="winner-play-again">HELL YEAH!</button>
                 </div>
             </div>
         <div class="score">
@@ -46,7 +53,7 @@
             </ul>
         </div>
 
-        <h2>Use the alphabet below to guess the word. </h2>
+        <h2>Use the alphabet below to guess the word</h2>
         <h1 id='word'></h1>
         <div id='buttons'></div>
         <p>Wrong Letters: <span id='wrongLettersDOM'></span></p>

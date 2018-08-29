@@ -16,8 +16,10 @@ request.send();
 
 
 // global variables
-const modal = document.querySelector('.modal');
-const playAgainButton = document.querySelector('.play-again');
+const loserModal = document.querySelector('.loser-modal');
+const winnerModal = document.querySelector('.winner-modal');
+const loserPlayAgain = document.querySelector('.loser-play-again');
+const winnerPlayAgain = document.querySelector('.winner-play-again');
 const word = document.getElementById('word');
 const wrongLettersDOM = document.getElementById('wrongLettersDOM');
 const buttons = document.getElementById('buttons');
@@ -51,15 +53,23 @@ function createButtons() {
 
 createButtons();
 
-function openModal() {
-    modal.style.display = 'block';
+function openLoserModal() {
+    loserModal.style.display = 'block';
+}
+
+function openWinnerModal() {
+    winnerModal.style.display = 'block';
 }
 
 function reloadPage() {
     location.reload();
 }
 
-playAgainButton.addEventListener('click', function () {
+winnerPlayAgain.addEventListener('click', function () {
+    reloadPage();
+})
+
+loserPlayAgain.addEventListener('click', function () {
     reloadPage();
 })
 
@@ -116,7 +126,6 @@ function handleSuccess() {
 
                     // changes the underscore to the buttonClick
                     underscore[chosenWord.indexOf(buttonClick)] = buttonClick;
-                    
 
                     // add the underscores + correct letters to DOM
                     docUnderscore.innerHTML = underscore.join(' ');
@@ -134,18 +143,14 @@ function handleSuccess() {
                     wrongNum++;
                     
                 }
-                
-                console.log(wrongNum);
-                
-                
             }
 
             // if entire word is right, win game
             if (underscore.join('') == chosenWord) {
-                alert('you win');
+                openWinnerModal();
             // if there are 6 wrong letters, game over    
             } if (wrongLetter.length === 6) {
-                openModal();
+                openLoserModal();
             }
 
         }
@@ -153,12 +158,9 @@ function handleSuccess() {
         // removes stars on wrong guesses 
         let stars = document.querySelectorAll('.fa-star');
 
-        
-        
-        
         if (wrongNum == 1) {
-                    stars[0].remove();
-                    wrongNum = 0;
+            stars[0].remove();
+            wrongNum = 0;
         }
 
     });
