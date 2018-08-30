@@ -1,0 +1,87 @@
+body {
+    margin: 0 auto;
+    width: 800px;
+    text-align: center;
+    font-family: 'Sawarabi Mincho', sans-serif;
+    color: #563f46;
+}
+
+
+#word {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+ul li {
+    display: inline;
+}
+
+.container {
+     align-content: center;
+}
+
+.score .stars li {
+    list-style: none;
+    display: inline-block;
+    color: #ffcc5c;
+}
+
+#alphabet li {
+    list-style: none;
+    margin: 0 10px 10px 0;
+    width: 60px;
+    height: 40px;
+    padding: 5.5px;
+    background: #96ceb4;
+    color: black;
+    cursor: pointer;
+    border: solid 1px #508577;
+    border-radius: 2.5px
+}
+
+#alphabet li:hover,
+.loser-play-again:hover,
+.winner-play-again:hover {
+    background-color: #2b6c5b;
+    color: white;
+}
+
+.loser-modal, 
+.winner-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3)
+}
+
+.loser-modal-content, 
+.winner-modal-content{
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 70%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+        0 7px 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+.loser-play-again, 
+.winner-play-again {
+    background: #96ceb4;
+    cursor: pointer;
+    border: solid 1px #508577;
+    border-radius: 2.5px
+}
+
+.fa-frown-open,
+.fa-grin-hearts {
+   color: #feb236;
+}
+
+.modalHeader {
+    font-size: 1.7em;
+}
