@@ -3,7 +3,9 @@ body {
     width: 800px;
     text-align: center;
     font-family: 'Sawarabi Mincho', sans-serif;
+    color: #563f46;
 }
+
 
 #word {
     font-size: 2em;
@@ -22,7 +24,6 @@ ul li {
     list-style: none;
     display: inline-block;
     color: #ffcc5c;
-    
 }
 
 #alphabet li {
@@ -38,8 +39,11 @@ ul li {
     border-radius: 2.5px
 }
 
-#alphabet li:hover {
-    background-color: #346956;
+#alphabet li:hover,
+.loser-play-again:hover,
+.winner-play-again:hover {
+    background-color: #2b6c5b;
+    color: white;
 }
 
 .loser-modal, 
@@ -63,4 +67,17 @@ ul li {
     width: 70%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
         0 7px 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+.loser-play-again, 
+.winner-play-again {
+    background: #96ceb4;
+    cursor: pointer;
+    border: solid 1px #508577;
+    border-radius: 2.5px
+}
+
+.fa-frown-open,
+.fa-grin-hearts {
+   color: #feb236;
 }
