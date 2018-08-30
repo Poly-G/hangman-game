@@ -2,6 +2,7 @@ body {
     margin: 0 auto;
     width: 800px;
     text-align: center;
+    font-family: 'Sawarabi Mincho', sans-serif;
 }
 
 #word {
@@ -20,6 +21,7 @@ ul li {
 .score .stars li {
     list-style: none;
     display: inline-block;
+    color: #ffcc5c;
     
 }
 
@@ -29,15 +31,15 @@ ul li {
     width: 35px;
     height: 40px;
     padding: 5.5px;
-    background: black;
-    color: white;
+    background: #96ceb4;
+    color: black;
     cursor: pointer;
-    border: solid 1px black;
+    border: solid 1px #508577;
     border-radius: 2.5px
 }
 
 #alphabet li:hover {
-    background-color: grey;
+    background-color: #346956;
 }
 
 .loser-modal, 
